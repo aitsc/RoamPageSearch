@@ -317,13 +317,19 @@ on run argv
 
 
 	set preferredBrowser to (system attribute "preferredBrowser")
-	if (preferredBrowser is "" or (preferredBrowser is not "Safari" and preferredBrowser is not "Chrome" and preferredBrowser is not "Brave" and preferredBrowser is not "Vivaldi")) then
-		display dialog "Please set preferredBrowser in workflow environment variables to either Safari, Chrome, Vivaldi, or Brave"
+	if (preferredBrowser is "" or (preferredBrowser is not "Safari" and preferredBrowser is not "Chrome" and preferredBrowser is not "Brave" and preferredBrowser is not "Vivaldi" and preferredBrowser is not "Microsoft Edge")) then
+		display dialog "Please set preferredBrowser in workflow environment variables to either Safari, Chrome, Vivaldi, Brave, or Microsoft Edge"
 		return
 	end if
 
 	if preferredBrowser is "Chrome" then
 		set browsername to "Google Chrome"
+	end if
+
+	if preferredBrowser is "Microsoft Edge" then
+		#treat Microsoft Edge as chrome
+		set preferredBrowser to "Chrome"
+		set browsername to "Microsoft Edge"
 	end if
 
 	if preferredBrowser is "Brave" then
